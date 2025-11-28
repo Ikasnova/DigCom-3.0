@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { LearningOutcome, KSA, Language } from '../types';
 import { UI_TRANSLATIONS } from '../data';
@@ -47,22 +48,24 @@ const OutcomeCard: React.FC<OutcomeCardProps> = ({ outcome, language }) => {
           {outcome.id.replace('LO', '')}
         </div>
 
-        {/* AI Explicit Ribbon - Simplified */}
+        {/* AI Explicit Indicator - Modern Geometric Corner */}
         {isAiExplicit && (
-           <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none overflow-hidden z-10">
-            <div 
-              className="absolute top-[12px] right-[-22px] rotate-45 text-white text-[9px] font-bold py-1 w-[90px] text-center shadow-sm tracking-widest"
-              style={{ backgroundColor: '#7e4d99' }}
-            >
-              AI EXPLICIT
-            </div>
+          <div className="absolute top-0 right-0 z-10 pointer-events-none">
+             <div 
+               className="w-14 h-14 bg-[#7e4d99] flex justify-end items-start pt-2 pr-2"
+               style={{ 
+                 clipPath: 'polygon(0 0, 100% 0, 100% 100%)'
+               }}
+             >
+                <span className="text-white font-black text-lg tracking-tighter leading-none">IA</span>
+             </div>
           </div>
         )}
 
         <div className="p-6 flex flex-col h-full relative z-0">
           
           {/* Header Metadata */}
-          <div className="flex flex-col gap-1 mb-4">
+          <div className="flex flex-col gap-1 mb-4 pr-8">
             <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
               {outcome.id}
             </span>

@@ -20,10 +20,16 @@ export enum KSA {
   ATTITUDE = 'Attitude'
 }
 
+export interface CurriculumStageDetail {
+  activity: LocalizedText;
+  competenciaGeneral: LocalizedText; // Key Competences / Competencias Clave
+  competenciasEspecificas: LocalizedText; // Subject specific competences
+}
+
 export interface CurriculumExamples {
-  primaria: LocalizedText;
-  eso: LocalizedText;
-  bachillerato: LocalizedText;
+  primaria: CurriculumStageDetail;
+  eso: CurriculumStageDetail;
+  bachillerato: CurriculumStageDetail;
 }
 
 export interface LearningOutcome {
@@ -34,5 +40,5 @@ export interface LearningOutcome {
   aiLabel: string;
   competenceArea: LocalizedText; 
   competenceSubArea: LocalizedText;
-  examples?: CurriculumExamples; // Optional field for curricular examples
+  examples?: CurriculumExamples;
 }

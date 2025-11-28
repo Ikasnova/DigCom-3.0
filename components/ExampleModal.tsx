@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Language, CurriculumExamples } from '../types';
 import { UI_TRANSLATIONS } from '../data';
@@ -16,6 +17,8 @@ const ExampleModal: React.FC<ExampleModalProps> = ({ isOpen, onClose, examples, 
 
   if (!isOpen) return null;
 
+  const currentExample = examples[activeTab];
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
@@ -24,14 +27,14 @@ const ExampleModal: React.FC<ExampleModalProps> = ({ isOpen, onClose, examples, 
         onClick={onClose}
       ></div>
 
-      {/* Modal Content - Sharp edges, clean look */}
-      <div className="bg-white w-full max-w-3xl overflow-hidden relative z-10 animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh] shadow-2xl">
+      {/* Modal Content */}
+      <div className="bg-white w-full max-w-4xl overflow-hidden relative z-10 animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh] shadow-2xl">
         
         {/* Header */}
         <div className="bg-slate-900 p-8 flex justify-between items-start">
           <div className="pr-8">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block">
-              Curriculum Connection
+              Curriculum Connection (Navarra / LOMLOE)
             </span>
             <h3 className="text-xl md:text-2xl font-black text-white leading-tight tracking-tight">
               {title}
@@ -45,7 +48,7 @@ const ExampleModal: React.FC<ExampleModalProps> = ({ isOpen, onClose, examples, 
           </button>
         </div>
 
-        {/* Tabs - Text Only */}
+        {/* Tabs */}
         <div className="flex border-b border-slate-200 bg-white">
           <button
             onClick={() => setActiveTab('primaria')}
@@ -81,17 +84,42 @@ const ExampleModal: React.FC<ExampleModalProps> = ({ isOpen, onClose, examples, 
 
         {/* Content Body */}
         <div className="p-8 overflow-y-auto bg-white flex-1">
-          <div className="prose prose-slate max-w-none">
-            <div className="pl-6 border-l-4 border-slate-200">
-              <p className="whitespace-pre-line text-lg text-slate-700 leading-relaxed font-light">
-                {examples[activeTab][language]}
-              </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+             {/* Left Col: Activity */}
+            <div className="col-span-1 md:col-span-2">
+               <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 border-b border-slate-100 pb-2">
+                 {t.activity}
+               </h4>
+               <p className="text-lg text-slate-800 leading-relaxed font-light">
+                 {currentExample.activity[language]}
+               </p>
             </div>
-            <div className="mt-8 pt-6 border-t border-slate-100">
-              <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest text-right">
-                Departamento de Educación · Comunidad Foral de Navarra
-              </p>
+
+            {/* Bottom Row: Competences */}
+            <div className="bg-slate-50 p-6 rounded-sm border-l-4 border-slate-200">
+               <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                 {t.specComp}
+               </h4>
+               <p className="text-sm font-medium text-slate-700">
+                 {currentExample.competenciasEspecificas[language]}
+               </p>
             </div>
+
+            <div className="bg-slate-50 p-6 rounded-sm border-l-4 border-slate-200">
+               <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                 {t.genComp}
+               </h4>
+               <p className="text-sm font-bold text-slate-700 font-mono">
+                 {currentExample.competenciaGeneral[language]}
+               </p>
+            </div>
+          </div>
+
+          <div className="mt-4 pt-6 border-t border-slate-100">
+            <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest text-right">
+              Departamento de Educación · Comunidad Foral de Navarra
+            </p>
           </div>
         </div>
       </div>
