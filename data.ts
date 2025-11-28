@@ -108,11 +108,11 @@ export const UI_TRANSLATIONS = {
 
 // Helper to define area names
 const AREAS = {
-  1: { en: '1. Information Search', es: '1. Búsqueda de información', eu: '1. Informazioaren bilaketa' },
-  2: { en: '2. Communication', es: '2. Comunicación', eu: '2. Komunikazioa' },
-  3: { en: '3. Content Creation', es: '3. Creación de contenidos', eu: '3. Eduki digitalen sorkuntza' },
-  4: { en: '4. Safety', es: '4. Seguridad', eu: '4. Segurtasuna' },
-  5: { en: '5. Problem Solving', es: '5. Resolución de problemas', eu: '5. Arazoen ebazpena' }
+  1: { en: '1. Information Search, Evaluation and Management', es: '1. Búsqueda, evaluación y gestión de información', eu: '1. Informazioaren bilaketa, ebaluazioa eta kudeaketa' },
+  2: { en: '2. Communication and Collaboration', es: '2. Comunicación y colaboración', eu: '2. Komunikazioa eta elkarlana' },
+  3: { en: '3. Content Creation', es: '3. Creación de contenidos', eu: '3. Edukien sorkuntza' },
+  4: { en: '4. Safety, Wellbeing and Responsible Use', es: '4. Seguridad, bienestar y uso responsable', eu: '4. Segurtasuna, ongizatea eta erabilera arduratsua' },
+  5: { en: '5. Problem Identification and Solving', es: '5. Identificación y resolución de problemas', eu: '5. Arazoen identifikazioa eta ebazpena' }
 };
 
 const SUB_AREAS = {
@@ -139,371 +139,54 @@ const SUB_AREAS = {
   '5.4': { en: '5.4 Competence gaps', es: '5.4 Brechas de competencia', eu: '5.4 Gaitasun-hutsuneak' }
 };
 
-// Curriculum Templates by Sub-Area
-// This map ensures that EVERY card gets a rigorous, stage-appropriate example based on its sub-area.
-const AREA_EXAMPLES_TEMPLATES: Record<string, CurriculumExamples> = {
-  '1.1': {
-    primaria: {
-      es: "Área: Conocimiento del Medio. Uso de buscadores adaptados (ej. Bunis) y palabras clave sencillas para localizar información sobre flora y fauna local.",
-      eu: "Arloa: Ingurunearen Ezaguera. Bilatzaile egokituak (adib. Bunis) eta gako-hitz errazak erabiltzea tokiko flora eta faunari buruzko informazioa aurkitzeko.",
-      en: "Area: Knowledge of the Environment. Use of adapted search engines (e.g. Bunis) and simple keywords to locate information on local flora and fauna."
-    },
-    eso: {
-      es: "Materia: Digitalización. Comparación de resultados entre motores de búsqueda generalistas y académicos. Uso de operadores booleanos básicos.",
-      eu: "Ikasgaia: Digitalizazioa. Bilatzaile orokorren eta akademikoen arteko emaitzen konparaketa. Oinarrizko operadore boolearren erabilera.",
-      en: "Subject: Digitalization. Comparison of results between general and academic search engines. Use of basic Boolean operators."
-    },
-    bachillerato: {
-      es: "Materia: Tecnologías Digitales Aplicadas. Estrategias avanzadas de recuperación de información en bases de datos especializadas y repositorios científicos.",
-      eu: "Ikasgaia: Teknologia Digital Aplikatuak. Informazioa berreskuratzeko estrategia aurreratuak datu-base espezializatuetan eta biltegi zientifikoetan.",
-      en: "Subject: Applied Digital Technologies. Advanced information retrieval strategies in specialized databases and scientific repositories."
-    }
-  },
-  '1.2': {
-    primaria: {
-      es: "Área: Lengua Castellana. Distinción entre hechos y opiniones en textos digitales sencillos. Identificación de la autoría en páginas web.",
-      eu: "Arloa: Gaztelania. Gertakarien eta iritzien arteko bereizketa testu digital errazetan. Web orrietako egiletza identifikatzea.",
-      en: "Area: Spanish Language. Distinction between facts and opinions in simple digital texts. Identification of authorship on web pages."
-    },
-    eso: {
-      es: "Materia: Geografía e Historia. Análisis crítico de noticias (Fake News) y verificación de fuentes digitales. Evaluación de la fiabilidad.",
-      eu: "Ikasgaia: Geografia eta Historia. Albisteen analisi kritikoa (Fake News) eta iturri digitalen egiaztapena. Fidagarritasunaren ebaluazioa.",
-      en: "Subject: Geography and History. Critical analysis of news (Fake News) and verification of digital sources. Evaluation of reliability."
-    },
-    bachillerato: {
-      es: "Materia: Filosofía. Análisis de sesgos cognitivos y algorítmicos en la recepción de información. Evaluación crítica de deepfakes y contenido sintético.",
-      eu: "Ikasgaia: Filosofia. Informazioa jasotzean dauden alborapen kognitibo eta algoritmikoen analisia. Deepfake eta eduki sintetikoen ebaluazio kritikoa.",
-      en: "Subject: Philosophy. Analysis of cognitive and algorithmic biases in information reception. Critical evaluation of deepfakes and synthetic content."
-    }
-  },
-  '1.3': {
-    primaria: {
-      es: "Área: Competencia Digital. Guardado y recuperación de archivos en carpetas locales con nombres descriptivos.",
-      eu: "Arloa: Gaitasun Digitala. Fitxategiak tokiko karpetetan gordetzea eta berreskuratzea izen deskriptiboekin.",
-      en: "Area: Digital Competence. Saving and retrieving files in local folders with descriptive names."
-    },
-    eso: {
-      es: "Materia: Tecnología. Gestión de almacenamiento en la nube, control de versiones y copias de seguridad de trabajos escolares.",
-      eu: "Ikasgaia: Teknologia. Hodeiko biltegiratzearen kudeaketa, bertsioen kontrola eta eskola-lanen segurtasun-kopiak.",
-      en: "Subject: Technology. Cloud storage management, version control, and backups of school work."
-    },
-    bachillerato: {
-      es: "Materia: TDA. Gestión avanzada de datos masivos, taxonomías de archivos y uso de metadatos para la organización documental.",
-      eu: "Ikasgaia: TDA. Datu masiboen kudeaketa aurreratua, fitxategien taxonomiak eta metadatuen erabilera dokumentuak antolatzeko.",
-      en: "Subject: ADT. Advanced management of big data, file taxonomies, and use of metadata for document organization."
-    }
-  },
-  '2.1': {
-    primaria: {
-      es: "Área: Tutoría. Uso del correo electrónico corporativo escolar para comunicarse con docentes respetando normas básicas.",
-      eu: "Arloa: Tutoretza. Eskolako posta elektroniko korporatiboa erabiltzea irakasleekin komunikatzeko, oinarrizko arauak errespetatuz.",
-      en: "Area: Tutorial. Use of school corporate email to communicate with teachers respecting basic rules."
-    },
-    eso: {
-      es: "Materia: Digitalización. Uso de plataformas colaborativas (Teams/Google Classroom) y distinción entre comunicación síncrona y asíncrona.",
-      eu: "Ikasgaia: Digitalizazioa. Plataforma kolaboratiboen erabilera (Teams/Google Classroom) eta komunikazio sinkrono eta asinkronoaren arteko bereizketa.",
-      en: "Subject: Digitalization. Use of collaborative platforms (Teams/Google Classroom) and distinction between synchronous and asynchronous communication."
-    },
-    bachillerato: {
-      es: "Materia: Economía. Gestión de la comunicación corporativa y profesional. Videoconferencias avanzadas y etiqueta profesional.",
-      eu: "Ikasgaia: Ekonomia. Komunikazio korporatibo eta profesionalaren kudeaketa. Bideokonferentzia aurreratuak eta etiketa profesionala.",
-      en: "Subject: Economics. Management of corporate and professional communication. Advanced video conferencing and professional etiquette."
-    }
-  },
-  '2.2': {
-    primaria: {
-      es: "Área: Educación Artística. Compartir dibujos digitales en el entorno virtual de aprendizaje del centro, entendiendo quién puede verlos.",
-      eu: "Arloa: Arte Hezkuntza. Marrazki digitalak ikastetxeko ikaskuntza-ingurune birtualean partekatzea, nork ikus ditzakeen ulertuz.",
-      en: "Area: Arts Education. Sharing digital drawings in the school's virtual learning environment, understanding who can view them."
-    },
-    eso: {
-      es: "Materia: Tecnología. Publicación de contenidos respetando licencias Creative Commons y citando fuentes originales.",
-      eu: "Ikasgaia: Teknologia. Edukiak argitaratzea Creative Commons lizentziak errespetatuz eta jatorrizko iturriak aipatuz.",
-      en: "Subject: Technology. Publishing content respecting Creative Commons licenses and citing original sources."
-    },
-    bachillerato: {
-      es: "Materia: Proyectos. Difusión de trabajos de investigación en repositorios abiertos y redes profesionales (LinkedIn), gestionando la privacidad.",
-      eu: "Ikasgaia: Proiektuak. Ikerketa-lanen zabalkundea biltegi irekietan eta sare profesionaletan (LinkedIn), pribatutasuna kudeatuz.",
-      en: "Subject: Projects. Dissemination of research work in open repositories and professional networks (LinkedIn), managing privacy."
-    }
-  },
-  '2.3': {
-    primaria: {
-      es: "Área: Valores Cívicos. Comprensión de las normas de convivencia en entornos digitales escolares.",
-      eu: "Arloa: Balio Zibikoak. Eskolako ingurune digitaletako bizikidetza-arauak ulertzea.",
-      en: "Area: Civic Values. Understanding rules of coexistence in school digital environments."
-    },
-    eso: {
-      es: "Materia: Geografía e Historia. Participación ciudadana a través de medios digitales. Activismo online responsable.",
-      eu: "Ikasgaia: Geografia eta Historia. Herritarren parte-hartzea bitarteko digitalen bidez. Lineako aktibismo arduratsua.",
-      en: "Subject: Geography and History. Civic participation through digital means. Responsible online activism."
-    },
-    bachillerato: {
-      es: "Materia: Ciudadanía Digital. Uso de la administración electrónica (Certificado Digital, Cl@ve) y comprensión de derechos digitales.",
-      eu: "Ikasgaia: Herritartasun Digitala. Administrazio elektronikoaren erabilera (Ziurtagiri Digitala, Cl@ve) eta eskubide digitalen ulermena.",
-      en: "Subject: Digital Citizenship. Use of e-government (Digital Certificate, Cl@ve) and understanding of digital rights."
-    }
-  },
-  '2.4': {
-    primaria: {
-      es: "Área: Proyectos. Trabajo en grupo utilizando documentos compartidos sencillos para escribir una historia conjunta.",
-      eu: "Arloa: Proiektuak. Talde-lana partekatutako dokumentu errazak erabiliz istorio bateratu bat idazteko.",
-      en: "Area: Projects. Group work using simple shared documents to write a joint story."
-    },
-    eso: {
-      es: "Materia: Tecnología. Edición simultánea de documentos y gestión de comentarios/revisiones en trabajos grupales.",
-      eu: "Ikasgaia: Teknologia. Dokumentuen aldibereko edizioa eta iruzkinen/berrikuspenen kudeaketa talde-lanetan.",
-      en: "Subject: Technology. Simultaneous editing of documents and management of comments/revisions in group work."
-    },
-    bachillerato: {
-      es: "Materia: TDA. Gestión de proyectos colaborativos complejos usando herramientas como Kanban digital o diagramas de Gantt.",
-      eu: "Ikasgaia: TDA. Lankidetza-proiektu konplexuen kudeaketa Kanban digitala edo Gantt diagramak bezalako tresnak erabiliz.",
-      en: "Subject: ADT. Management of complex collaborative projects using tools like digital Kanban or Gantt charts."
-    }
-  },
-  '2.5': {
-    primaria: {
-      es: "Área: Lengua. Redacción de mensajes respetuosos y uso adecuado de emoticonos en foros escolares.",
-      eu: "Arloa: Hizkuntza. Mezu errespetuzkoak idaztea eta emotikonoen erabilera egokia eskolako foroetan.",
-      en: "Area: Language. Writing respectful messages and appropriate use of emoticons in school forums."
-    },
-    eso: {
-      es: "Materia: Tutoría. Prevención del ciberacoso. Análisis del tono y la empatía en la comunicación digital escrita.",
-      eu: "Ikasgaia: Tutoretza. Ziberjazarpenaren prebentzioa. Tonoaren eta enpatiaren analisia idatzizko komunikazio digitalean.",
-      en: "Subject: Tutorial. Prevention of cyberbullying. Analysis of tone and empathy in written digital communication."
-    },
-    bachillerato: {
-      es: "Materia: Comunicación. Adaptación de la netiqueta a contextos interculturales y profesionales diversos.",
-      eu: "Ikasgaia: Komunikazioa. Netiketaren egokitzapena kulturarteko eta lanbide-testuinguru anitzetara.",
-      en: "Subject: Communication. Adaptation of netiquette to diverse intercultural and professional contexts."
-    }
-  },
-  '2.6': {
-    primaria: {
-      es: "Área: Tutoría. Cuidado de las credenciales de acceso (usuario y contraseña) a las plataformas educativas.",
-      eu: "Arloa: Tutoretza. Hezkuntza-plataformetarako sarbide-kredentzialak (erabiltzailea eta pasahitza) zaintzea.",
-      en: "Area: Tutorial. Care of access credentials (username and password) to educational platforms."
-    },
-    eso: {
-      es: "Materia: Digitalización. Gestión de la identidad digital en redes sociales. Configuración de privacidad en perfiles.",
-      eu: "Ikasgaia: Digitalizazioa. Identitate digitalaren kudeaketa sare sozialetan. Profilen pribatutasun-konfigurazioa.",
-      en: "Subject: Digitalization. Management of digital identity on social networks. Privacy configuration in profiles."
-    },
-    bachillerato: {
-      es: "Materia: Formación y Orientación Laboral. Construcción de una marca personal profesional y gestión de la reputación online.",
-      eu: "Ikasgaia: Laneko Prestakuntza eta Orientabidea. Marka pertsonal profesionala eraikitzea eta lineako ospearen kudeaketa.",
-      en: "Subject: FOL. Building a professional personal brand and managing online reputation."
-    }
-  },
-  '3.1': {
-    primaria: {
-      es: "Área: Lengua. Creación de textos sencillos con procesadores de texto, incluyendo imágenes básicas.",
-      eu: "Arloa: Hizkuntza. Testu errazak sortzea testu-prozesadoreekin, oinarrizko irudiak barne.",
-      en: "Area: Language. Creating simple texts with word processors, including basic images."
-    },
-    eso: {
-      es: "Materia: Digitalización. Producción de contenidos multimedia (presentaciones, infografías, podcast) con herramientas de autor.",
-      eu: "Ikasgaia: Digitalizazioa. Multimedia-edukien ekoizpena (aurkezpenak, infografiak, podcast-ak) egile-tresnekin.",
-      en: "Subject: Digitalization. Production of multimedia content (presentations, infographics, podcasts) with authoring tools."
-    },
-    bachillerato: {
-      es: "Materia: TDA. Creación de contenidos digitales complejos (webs, apps) y uso ético de IA generativa para la producción.",
-      eu: "Ikasgaia: TDA. Eduki digital konplexuen sorkuntza (webguneak, app-ak) eta IA sortzailearen erabilera etikoa ekoizpenerako.",
-      en: "Subject: ADT. Creation of complex digital content (webs, apps) and ethical use of generative AI for production."
-    }
-  },
-  '3.2': {
-    primaria: {
-      es: "Área: Educación Artística. Realización de collages digitales combinando textos e imágenes de bancos de recursos escolares.",
-      eu: "Arloa: Arte Hezkuntza. Collage digitalak egitea eskolako baliabide-bankuetako testuak eta irudiak konbinatuz.",
-      en: "Area: Arts Education. Making digital collages combining texts and images from school resource banks."
-    },
-    eso: {
-      es: "Materia: Música/Plástica. Edición y remezcla de obras (mashups) citando procedencia y respetando derechos.",
-      eu: "Ikasgaia: Musika/Plastika. Obren edizioa eta nahasketa (mashups) jatorria aipatuz eta eskubideak errespetatuz.",
-      en: "Subject: Music/Arts. Editing and remixing works (mashups) citing provenance and respecting rights."
-    },
-    bachillerato: {
-      es: "Materia: Ciencias de la Computación. Integración de librerías de código y APIs de terceros en proyectos de desarrollo propios.",
-      eu: "Ikasgaia: Konputazio Zientziak. Kode-liburutegien eta hirugarrenen APIen integrazioa garapen-proiektu propioetan.",
-      en: "Subject: Computer Science. Integration of code libraries and third-party APIs into own development projects."
-    }
-  },
-  '3.3': {
-    primaria: {
-      es: "Área: Educación Artística. Entender que los dibujos y textos de internet tienen dueños y autores.",
-      eu: "Arloa: Arte Hezkuntza. Interneteko marrazkiek eta testuek jabeak eta egileak dituztela ulertzea.",
-      en: "Area: Arts Education. Understanding that drawings and texts on the internet have owners and authors."
-    },
-    eso: {
-      es: "Materia: Digitalización. Tipos de licencias (Copyright, Copyleft, Creative Commons) y uso de bancos de imágenes libres.",
-      eu: "Ikasgaia: Digitalizazioa. Lizentzia motak (Copyright, Copyleft, Creative Commons) eta irudi-banku askeen erabilera.",
-      en: "Subject: Digitalization. Types of licenses (Copyright, Copyleft, Creative Commons) and use of free image banks."
-    },
-    bachillerato: {
-      es: "Materia: Economía. Propiedad intelectual en el software, patentes y regulación sobre contenidos generados por IA.",
-      eu: "Ikasgaia: Ekonomia. Jabetza intelektuala softwarean, patenteak eta IA bidez sortutako edukiei buruzko erregulazioa.",
-      en: "Subject: Economics. Intellectual property in software, patents, and regulation on AI-generated content."
-    }
-  },
-  '3.4': {
-    primaria: {
-      es: "Área: Matemáticas. Iniciación a la programación por bloques (Scratch) para resolver retos lógicos sencillos.",
-      eu: "Arloa: Matematika. Bloke bidezko programazioan hastapena (Scratch) erronka logiko errazak ebazteko.",
-      en: "Area: Math. Introduction to block programming (Scratch) to solve simple logic challenges."
-    },
-    eso: {
-      es: "Materia: Tecnología y Digitalización. Programación estructurada (Python) y robótica educativa (Arduino/Micro:bit).",
-      eu: "Ikasgaia: Teknologia eta Digitalizazioa. Programazio egituratua (Python) eta hezkuntza-robotika (Arduino/Micro:bit).",
-      en: "Subject: Technology. Structured programming (Python) and educational robotics (Arduino/Micro:bit)."
-    },
-    bachillerato: {
-      es: "Materia: Ciencias de la Computación. Desarrollo de algoritmos complejos, introducción a la Inteligencia Artificial y Machine Learning.",
-      eu: "Ikasgaia: Konputazio Zientziak. Algoritmo konplexuen garapena, Adimen Artifizialera eta Machine Learning-era sarrera.",
-      en: "Subject: Computer Science. Development of complex algorithms, introduction to Artificial Intelligence and Machine Learning."
-    }
-  },
-  '4.1': {
-    primaria: {
-      es: "Área: Tutoría. Hábitos básicos de seguridad: bloquear la tablet al terminar y no compartir contraseñas.",
-      eu: "Arloa: Tutoretza. Oinarrizko segurtasun-ohiturak: tableta blokeatu amaitzean eta pasahitzik ez partekatu.",
-      en: "Area: Tutorial. Basic security habits: lock the tablet when finished and do not share passwords."
-    },
-    eso: {
-      es: "Materia: Digitalización. Protección contra malware, phishing y configuración de autenticación en dos pasos.",
-      eu: "Ikasgaia: Digitalizazioa. Malware eta phishing-aren aurkako babesa eta bi urratseko autentifikazioaren konfigurazioa.",
-      en: "Subject: Digitalization. Protection against malware, phishing, and two-step authentication configuration."
-    },
-    bachillerato: {
-      es: "Materia: TDA. Criptografía básica, seguridad en redes y auditoría de seguridad de dispositivos personales.",
-      eu: "Ikasgaia: TDA. Oinarrizko kriptografia, sare-segurtasuna eta gailu pertsonalen segurtasun-auditoria.",
-      en: "Subject: ADT. Basic cryptography, network security, and security audit of personal devices."
-    }
-  },
-  '4.2': {
-    primaria: {
-      es: "Área: Tutoría. No compartir datos sensibles (dirección, teléfono) en aplicaciones o juegos online.",
-      eu: "Arloa: Tutoretza. Datu sentikorrik (helbidea, telefonoa) ez partekatu lineako aplikazio edo jokoetan.",
-      en: "Area: Tutorial. Do not share sensitive data (address, phone) in online apps or games."
-    },
-    eso: {
-      es: "Materia: Valores Cívicos. Gestión de la privacidad en redes sociales, rastreo digital y gestión de cookies.",
-      eu: "Ikasgaia: Balio Zibikoak. Pribatutasunaren kudeaketa sare sozialetan, aztarna digitala eta cookie-en kudeaketa.",
-      en: "Subject: Civic Values. Privacy management on social networks, digital tracking, and cookie management."
-    },
-    bachillerato: {
-      es: "Materia: Ciudadanía Digital. Normativa RGPD, soberanía digital y derechos sobre los propios datos frente a grandes corporaciones.",
-      eu: "Ikasgaia: Herritartasun Digitala. DBEO araudia, burujabetza digitala eta norberaren datuen gaineko eskubideak korporazio handien aurrean.",
-      en: "Subject: Digital Citizenship. GDPR regulations, digital sovereignty, and rights over own data against large corporations."
-    }
-  },
-  '4.3': {
-    primaria: {
-      es: "Área: Educación Física. Higiene postural al usar dispositivos y control del tiempo de pantalla.",
-      eu: "Arloa: Gorputz Hezkuntza. Jarrera-higienea gailuak erabiltzean eta pantaila-denboraren kontrola.",
-      en: "Area: PE. Postural hygiene when using devices and screen time control."
-    },
-    eso: {
-      es: "Materia: Tutoría. Prevención de la adicción tecnológica, riesgos de las apuestas online y bienestar emocional digital.",
-      eu: "Ikasgaia: Tutoretza. Mendekotasun teknologikoaren prebentzioa, lineako apustuen arriskuak eta ongizate emozional digitala.",
-      en: "Subject: Tutorial. Prevention of technological addiction, risks of online betting, and digital emotional well-being."
-    },
-    bachillerato: {
-      es: "Materia: Psicología. Impacto psicológico de las redes sociales (FOMO, imagen corporal) y estrategias de desconexión digital.",
-      eu: "Ikasgaia: Psikologia. Sare sozialen inpaktu psikologikoa (FOMO, gorputz-irudia) eta deskonexio digitaleko estrategiak.",
-      en: "Subject: Psychology. Psychological impact of social networks (FOMO, body image) and digital disconnection strategies."
-    }
-  },
-  '4.4': {
-    primaria: {
-      es: "Área: Conocimiento del Medio. Reciclaje de pilas y dispositivos electrónicos. Apagar equipos al terminar.",
-      eu: "Arloa: Ingurunearen Ezaguera. Pilak eta gailu elektronikoak birziklatzea. Ekipoak itzali amaitzean.",
-      en: "Area: Environment. Recycling batteries and electronic devices. Turn off equipment when finished."
-    },
-    eso: {
-      es: "Materia: Geografía e Historia / Tecnología. Impacto medioambiental de la basura electrónica y consumo energético de los centros de datos.",
-      eu: "Ikasgaia: Geografia eta Historia / Teknologia. Zabor elektronikoaren ingurumen-inpaktua eta datu-zentroen energia-kontsumoa.",
-      en: "Subject: Geography / Technology. Environmental impact of e-waste and energy consumption of data centers."
-    },
-    bachillerato: {
-      es: "Materia: Ciencias de la Tierra. Obsolescencia programada, Green IT y sostenibilidad en el diseño tecnológico.",
-      eu: "Ikasgaia: Lurraren Zientziak. Zaharkitze programatua, Green IT eta jasangarritasuna diseinu teknologikoan.",
-      en: "Subject: Earth Sciences. Planned obsolescence, Green IT, and sustainability in technological design."
-    }
-  },
-  '5.1': {
-    primaria: {
-      es: "Área: Competencia Digital. Solución de problemas básicos: encender, reiniciar, comprobar conexión a internet.",
-      eu: "Arloa: Gaitasun Digitala. Oinarrizko arazoak konpontzea: piztu, berrabiarazi, interneteko konexioa egiaztatu.",
-      en: "Area: Digital Competence. Solving basic problems: turn on, restart, check internet connection."
-    },
-    eso: {
-      es: "Materia: Tecnología. Resolución de problemas de conectividad, configuración de periféricos y búsqueda de soluciones en foros.",
-      eu: "Ikasgaia: Teknologia. Konektibitate-arazoak konpontzea, periferikoen konfigurazioa eta foroetan irtenbideak bilatzea.",
-      en: "Subject: Technology. Solving connectivity problems, peripheral configuration, and searching for solutions in forums."
-    },
-    bachillerato: {
-      es: "Materia: TDA. Diagnóstico de averías hardware/software, virtualización y mantenimiento avanzado de sistemas.",
-      eu: "Ikasgaia: TDA. Hardware/software matxuren diagnostikoa, birtualizazioa eta sistemen mantentze-lan aurreratuak.",
-      en: "Subject: ADT. Hardware/software fault diagnosis, virtualization, and advanced system maintenance."
-    }
-  },
-  '5.2': {
-    primaria: {
-      es: "Área: Educación Artística. Elección de la herramienta de dibujo más adecuada para una tarea sencilla.",
-      eu: "Arloa: Arte Hezkuntza. Zeregin erraz baterako marrazketa-tresnarik egokiena aukeratzea.",
-      en: "Area: Arts Education. Choosing the most suitable drawing tool for a simple task."
-    },
-    eso: {
-      es: "Materia: Digitalización. Configuración del entorno personal de aprendizaje y herramientas de accesibilidad.",
-      eu: "Ikasgaia: Digitalizazioa. Ikaskuntza-ingurune pertsonalaren eta irisgarritasun-tresnen konfigurazioa.",
-      en: "Subject: Digitalization. Configuration of Personal Learning Environment and accessibility tools."
-    },
-    bachillerato: {
-      es: "Materia: TDA. Evaluación comparativa de software para necesidades profesionales y decisiones de compra tecnológica.",
-      eu: "Ikasgaia: TDA. Softwarearen ebaluazio konparatiboa behar profesionaletarako eta erosketa teknologikoko erabakietarako.",
-      en: "Subject: ADT. Comparative software evaluation for professional needs and technological purchase decisions."
-    }
-  },
-  '5.3': {
-    primaria: {
-      es: "Área: Educación Artística. Uso creativo de tablets para crear historias visuales o stop-motion básico.",
-      eu: "Arloa: Arte Hezkuntza. Tableten erabilera sortzailea istorio bisualak edo oinarrizko stop-motion-a sortzeko.",
-      en: "Area: Arts Education. Creative use of tablets to create visual stories or basic stop-motion."
-    },
-    eso: {
-      es: "Materia: Tecnología. Diseño e impresión 3D, edición de vídeo artístico y proyectos STEAM.",
-      eu: "Ikasgaia: Teknologia. 3D diseinua eta inprimaketa, bideo artistikoaren edizioa eta STEAM proiektuak.",
-      en: "Subject: Technology. 3D design and printing, artistic video editing, and STEAM projects."
-    },
-    bachillerato: {
-      es: "Materia: Proyectos. Innovación tecnológica, cultura Maker y desarrollo de prototipos para problemas sociales.",
-      eu: "Ikasgaia: Proiektuak. Berrikuntza teknologikoa, Maker kultura eta arazo sozialetarako prototipoen garapena.",
-      en: "Subject: Projects. Technological innovation, Maker culture, and prototype development for social problems."
-    }
-  },
-  '5.4': {
-    primaria: {
-      es: "Área: Tutoría. Identificar qué no se sabe hacer con el ordenador y pedir ayuda al docente o compañeros.",
-      eu: "Arloa: Tutoretza. Ordenagailuarekin zer egiten ez dakigun identifikatzea eta irakasleari edo ikaskideei laguntza eskatzea.",
-      en: "Area: Tutorial. Identify what cannot be done with the computer and ask the teacher or peers for help."
-    },
-    eso: {
-      es: "Materia: Digitalización. Uso de tutoriales online y MOOCs básicos para autoformación en nuevas herramientas.",
-      eu: "Ikasgaia: Digitalizazioa. Lineako tutorialen eta oinarrizko MOOCen erabilera tresna berrietan autoformaziorako.",
-      en: "Subject: Digitalization. Use of online tutorials and basic MOOCs for self-training in new tools."
-    },
-    bachillerato: {
-      es: "Materia: Orientación. Diseño de un Entorno Personal de Aprendizaje (PLE) para la actualización profesional continua.",
-      eu: "Ikasgaia: Orientabidea. Ikaskuntza Ingurune Pertsonalaren (PLE) diseinua etengabeko eguneratze profesionalerako.",
-      en: "Subject: Guidance. Design of a Personal Learning Environment (PLE) for continuous professional update."
-    }
-  }
+// Curriculum Data for Automatic Generation
+const NAVARRA_CURRICULUM = {
+  primaria: [
+    { es: 'Conocimiento del Medio', eu: 'Ingurunearen Ezaguera', en: 'Knowledge of the Environment' },
+    { es: 'Lengua Castellana y Literatura', eu: 'Gaztelania eta Literatura', en: 'Spanish Language and Literature' },
+    { es: 'Matemáticas', eu: 'Matematika', en: 'Mathematics' },
+    { es: 'Educación Artística', eu: 'Arte Hezkuntza', en: 'Arts Education' },
+    { es: 'Valores Cívicos y Éticos', eu: 'Balio Zibiko eta Etikoak', en: 'Civic and Ethical Values' }
+  ],
+  eso: [
+    { es: 'Tecnología y Digitalización', eu: 'Teknologia eta Digitalizazioa', en: 'Technology and Digitalization' },
+    { es: 'Geografía e Historia', eu: 'Geografia eta Historia', en: 'Geography and History' },
+    { es: 'Biología y Geología', eu: 'Biologia eta Geologia', en: 'Biology and Geology' },
+    { es: 'Educación Plástica, Visual y Audiovisual', eu: 'Plastika, Ikus-entzunezkoak', en: 'Visual Arts' },
+    { es: 'Música', eu: 'Musika', en: 'Music' }
+  ],
+  bachillerato: [
+    { es: 'Tecnologías Digitales Aplicadas (TDA)', eu: 'Teknologia Digital Aplikatuak', en: 'Applied Digital Technologies' },
+    { es: 'Ciencias de la Computación', eu: 'Konputazio Zientziak', en: 'Computer Science' },
+    { es: 'Economía y Emprendimiento', eu: 'Ekonomia eta Ekintzailetza', en: 'Economics and Entrepreneurship' },
+    { es: 'Filosofía', eu: 'Filosofia', en: 'Philosophy' },
+    { es: 'Cultura Audiovisual', eu: 'Ikus-entzunezko Kultura', en: 'Audiovisual Culture' }
+  ]
 };
 
-// Map of manually crafted specific examples
-const SPECIFIC_EXAMPLES_MAP: Record<string, CurriculumExamples> = {
-  // ... (keeping existing examples for LO1.1.01, LO1.1.02, etc.)
+const CONTEXTS = {
+  primaria: [
+    { es: 'un proyecto sobre la flora local', eu: 'tokiko landarediari buruzko proiektu bat', en: 'a project on local flora' },
+    { es: 'la creación de un cuento digital', eu: 'ipuin digital baten sorkuntza', en: 'creating a digital story' },
+    { es: 'la búsqueda de información segura', eu: 'informazio seguruaren bilaketa', en: 'searching for safe information' },
+    { es: 'el uso responsable de la tablet', eu: 'tableta modu arduratsuan erabiltzea', en: 'responsible tablet use' }
+  ],
+  eso: [
+    { es: 'un trabajo sobre los ODS', eu: 'GJH-ei buruzko lan bat', en: 'a project on SDGs' },
+    { es: 'el análisis de noticias falsas', eu: 'albiste faltsuen analisia', en: 'fake news analysis' },
+    { es: 'la programación de un robot', eu: 'robot baten programazioa', en: 'robot programming' },
+    { es: 'la edición de vídeo para una campaña', eu: 'kanpaina baterako bideo-edizioa', en: 'video editing for a campaign' }
+  ],
+  bachillerato: [
+    { es: 'una investigación académica rigurosa', eu: 'ikerketa akademiko zorrotza', en: 'rigorous academic research' },
+    { es: 'el desarrollo de un prototipo emprendedor', eu: 'prototipo ekintzaile baten garapena', en: 'developing an entrepreneurial prototype' },
+    { es: 'un debate ético sobre IA', eu: 'IAri buruzko eztabaida etikoa', en: 'an ethical debate on AI' },
+    { es: 'la gestión de la identidad profesional', eu: 'identitate profesionalaren kudeaketa', en: 'managing professional identity' }
+  ]
+};
+
+// Manually crafted specific examples for high-impact items
+const MANUAL_EXAMPLES: Record<string, CurriculumExamples> = {
   'LO1.1.01': {
     primaria: {
         es: "Área: Conocimiento del Medio.\nUso de buscadores infantiles (ej. Bunis) vs. buscadores generales para localizar imágenes de flora local. El alumnado distingue que un buscador visual es mejor para identificar plantas que uno puramente textual.",
@@ -519,40 +202,6 @@ const SPECIFIC_EXAMPLES_MAP: Record<string, CurriculumExamples> = {
         es: "Materia: Tecnologías Digitales Aplicadas.\nUso de operadores booleanos en bases de datos especializadas (ej. PubMed o bases jurídicas) frente a búsquedas en lenguaje natural en motores con IA, evaluando la precisión técnica requerida para un proyecto de investigación.",
         eu: "Ikasgaia: Teknologia Digital Aplikatuak.\nOperadore boolearren erabilera datu-base espezializatuetan (adib. PubMed) vs. hizkuntza naturaleko bilaketak IA duten motorretan, ikerketa-proiektu baterako behar den zehaztasun teknikoa ebaluatuz.",
         en: "Subject: Applied Digital Technologies.\nUsing Boolean operators in specialized databases vs. natural language searches in AI-driven engines, evaluating the technical precision required for a research project."
-    }
-  },
-  'LO1.1.02': {
-    primaria: {
-        es: "Área: Lengua Castellana y Literatura.\nEjercicio práctico: Buscar 'banco' en Google Imágenes y analizar por qué salen tanto asientos como entidades financieras. Refinar la búsqueda a 'banco de sentarse' para ver cómo cambia el resultado.",
-        eu: "Arloa: Gaztelania eta Literatura.\nAriketa praktikoa: Google Irudietan 'banco' bilatu eta aztertu zergatik agertzen diren bai eserlekuak bai finantza-erakundeak. Bilaketa 'banco de sentarse'-ra zehaztu emaitza nola aldatzen den ikusteko.",
-        en: "Area: Language.\nPractical exercise: Search 'bank' in Google Images and analyze why both seats and financial entities appear. Refine search to 'park bench' to see how the result changes."
-    },
-    eso: {
-        es: "Materia: Geografía e Historia.\nAnálisis de 'Burbujas de filtro'. Dos alumnos buscan el mismo término político polémico en sus dispositivos personales y comparan cómo el algoritmo personaliza los resultados según su historial.",
-        eu: "Ikasgaia: Geografia eta Historia.\n'Iragazki-burbuilen' analisia. Bi ikaslek termino politiko polemiko bera bilatzen dute beren gailu pertsonaletan eta algoritmoak emaitzak beren historialaren arabera nola pertsonalizatzen dituen konparatzen dute.",
-        en: "Subject: Geography and History.\nAnalysis of 'Filter Bubbles'. Two students search for the same controversial political term on their personal devices and compare how the algorithm customizes results based on history."
-    },
-    bachillerato: {
-        es: "Materia: Filosofía / TIC.\nInvestigación sobre sesgos algorítmicos. Modificar los 'prompts' en herramientas de IA Generativa para ver cómo ligeras variaciones semánticas alteran drásticamente el tono o la veracidad del texto generado.",
-        eu: "Ikasgaia: Filosofia / IKT.\nAlborapen algoritmikoei buruzko ikerketa. IA Sortzaileko tresnetan 'prompt'-ak aldatu, aldaketa semantiko txikiek sortutako testuaren tonua edo egiazkotasuna nola aldatzen duten ikusteko.",
-        en: "Subject: Philosophy / ICT.\nResearch on algorithmic biases. Modifying prompts in Generative AI tools to see how slight semantic variations drastically alter the tone or veracity of the generated text."
-    }
-  },
-  'LO1.1.04': {
-    primaria: {
-        es: "Área: Educación Artística.\nComparar cómo busca canciones un asistente de voz (Siri/Alexa) frente a escribir el título en una barra de búsqueda. Identificar que uno 'escucha' y el otro 'lee'.",
-        eu: "Arloa: Arte Hezkuntza.\nKonparatu ahots-laguntzaile batek (Siri/Alexa) abestiak nola bilatzen dituen eta izenburua bilaketa-barra batean idaztearekin. Bata 'entzuten' duela eta bestea 'irakurtzen' duela identifikatzea.",
-        en: "Area: Arts Education.\nCompare how a voice assistant (Siri/Alexa) searches for songs vs. typing the title in a search bar. Identify that one 'listens' and the other 'reads'."
-    },
-    eso: {
-        es: "Materia: Tecnología y Digitalización.\nCreación de una tabla comparativa entre un motor de búsqueda tradicional (indexación web) y un modelo de lenguaje (ChatGPT/Gemini). Diferenciar entre 'recuperar información existente' y 'generar respuesta probabilística'.",
-        eu: "Ikasgaia: Teknologia eta Digitalizazioa.\nBilatzaile tradizional baten (web indexazioa) eta hizkuntza-eredu baten (ChatGPT/Gemini) arteko konparaketa-taula sortzea. 'Dagoen informazioa berreskuratzea' eta 'erantzun probabilistikoa sortzea' bereiztea.",
-        en: "Subject: Technology.\nCreating a comparison table between a traditional search engine (web indexing) and a language model (LLM). Differentiate between 'retrieving existing info' and 'generating probabilistic response'."
-    },
-    bachillerato: {
-        es: "Materia: Ciencias de la Computación.\nAnálisis técnico de cómo funcionan los sistemas de recomendación (Netflix/TikTok) frente a los motores de búsqueda semántica. Estudio de los metadatos vs. vectores de características en IA.",
-        eu: "Ikasgaia: Konputazio Zientziak.\nGomendio-sistemek (Netflix/TikTok) eta bilatzaile semantikoek nola funtzionatzen duten azterketa teknikoa. Metadatuen vs. ezaugarri-bektoreen azterketa IAn.",
-        en: "Subject: Computer Science.\nTechnical analysis of how recommendation systems work vs. semantic search engines. Study of metadata vs. feature vectors in AI."
     }
   },
   'LO1.2.10': {
@@ -572,23 +221,6 @@ const SPECIFIC_EXAMPLES_MAP: Record<string, CurriculumExamples> = {
         en: "Subject: Contemporary World.\nCritical analysis of academic vs. popular sources. Evaluate scientific papers by tracking DOI, author affiliation, and conflicts of interest. Differentiate preprint from peer-reviewed."
     }
   },
-  'LO2.1.06': {
-    primaria: {
-        es: "Área: Lenguas Extranjeras.\nInteracción guiada con un chatbot educativo para practicar vocabulario básico en inglés. Identificar que la máquina responde a palabras clave específicas y no 'entiende' como un humano.",
-        eu: "Arloa: Atzerriko Hizkuntzak.\nInterakzio gidatua hezkuntza-chatbot batekin ingelesezko oinarrizko hiztegia lantzeko. Makinak gako-hitz zehatzei erantzuten diela eta ez duela gizaki batek bezala 'ulertzen' identifikatzea.",
-        en: "Area: Foreign Languages.\nGuided interaction with an educational chatbot to practice basic English vocabulary. Identify that the machine responds to specific keywords and doesn't 'understand' like a human."
-    },
-    eso: {
-        es: "Materia: Atención Educativa / Valores Cívicos.\nAnálisis de chatbots de atención al cliente. Identificar patrones repetitivos y limitaciones en la empatía. Discusión sobre cuándo es preferible un humano vs. una IA.",
-        eu: "Ikasgaia: Hezkuntza Arreta / Balio Zibikoak.\nBezeroarentzako arretarako chatbot-en analisia. Patroi errepikakorrak eta enpatiaren mugak identifikatzea. Gizaki bat vs. IA bat noiz den hobea eztabaidatzea.",
-        en: "Subject: Civic Values.\nAnalysis of customer service chatbots. Identify repetitive patterns and limitations in empathy. Discussion on when a human vs. AI is preferable."
-    },
-    bachillerato: {
-        es: "Materia: Economía / Empresa.\nEstudio de caso sobre la implementación de asistentes virtuales en la banca online. Análisis de reducción de costes vs. experiencia de usuario y exclusión digital de personas mayores.",
-        eu: "Ikasgaia: Ekonomia / Enpresa.\nLineako bankan laguntzaile birtualen ezarpenari buruzko kasu-azterketa. Kostuen murrizketa vs. erabiltzailearen esperientzia eta adinekoen bazterketa digitala aztertzea.",
-        en: "Subject: Economics.\nCase study on the implementation of virtual assistants in online banking. Analysis of cost reduction vs. user experience and digital exclusion of the elderly."
-    }
-  },
   'LO2.1.24': {
     primaria: {
         es: "Área: Matemáticas / Robótica (Adaptación al nivel).\nPensamiento Computacional: El alumnado debe dar instrucciones orales precisas a un compañero (que actúa como 'IA') para dibujar una figura geométrica compleja sin que este la vea. Aprenden que la ambigüedad en la instrucción ('dibuja una línea grande') lleva a errores, introduciendo la necesidad de precisión semántica.",
@@ -606,7 +238,7 @@ const SPECIFIC_EXAMPLES_MAP: Record<string, CurriculumExamples> = {
         en: "Subject: Computer Science.\nPrompt Chaining: Design a workflow where AI output serves as input for the next step. Ex: 1. Summarize text. 2. Extract keywords. 3. Generate quiz questions based on keywords."
     }
   },
-  'LO3.1.06': {
+   'LO3.1.06': {
     primaria: {
         es: "Área: Lengua y Literatura.\nEscritura creativa: Usar una herramienta de IA para generar el inicio de un cuento y que los alumnos lo terminen, corrigiendo incoherencias o elementos que no tengan sentido en su contexto cultural.",
         eu: "Arloa: Hizkuntza eta Literatura.\nIdazketa sortzailea: IA tresna bat erabili ipuin baten hasiera sortzeko eta ikasleek amaitu dezatela, inkoherentziak edo beren kultur testuinguruan zentzurik ez duten elementuak zuzenduz.",
@@ -640,23 +272,6 @@ const SPECIFIC_EXAMPLES_MAP: Record<string, CurriculumExamples> = {
         en: "Subject: Digital Citizenship.\nResearch on 'Deepfakes' and identity theft. Risks of sharing high-quality voice or video recordings that can be used to train impersonation models."
     }
   },
-  'LO5.1.01': {
-    primaria: {
-        es: "Área: Competencia Digital (Transversal).\nNormalización del error: Cuando la pizarra digital no funciona o el Chromebook no conecta, mantener la calma y seguir un protocolo sencillo (verificar cables, reiniciar) antes de llamar al docente.",
-        eu: "Arloa: Gaitasun Digitala.\nErrorearen normalizazioa: Arbel digitalak funtzionatzen ez duenean edo Chromebook-a konektatzen ez denean, lasaitasuna mantendu eta protokolo erraz bat jarraitu (kableak egiaztatu, berrabiarazi) irakasleari deitu aurretik.",
-        en: "Area: Digital Competence.\nNormalizing errors: When the smartboard doesn't work or the Chromebook doesn't connect, stay calm and follow a simple protocol (check cables, restart) before calling the teacher."
-    },
-    eso: {
-        es: "Materia: Tecnología.\nResolución de problemas de conectividad en el aula. Crear un diagrama de flujo para diagnosticar por qué no carga una página web (¿es el WiFi? ¿el servidor? ¿el navegador?).",
-        eu: "Ikasgaia: Teknologia.\nIkasgelako konektibitate-arazoen ebazpena. Fluxu-diagrama bat sortzea webgune bat zergatik ez den kargatzen diagnostikatzeko (WiFi-a da? zerbitzaria? arakatzailea?).",
-        en: "Subject: Technology.\nResolving connectivity problems in the classroom. Create a flow chart to diagnose why a web page isn't loading (is it WiFi? Server? Browser?)."
-    },
-    bachillerato: {
-        es: "Materia: TIC.\nGestión de incidencias en proyectos colaborativos. Si un archivo compartido se corrompe o se pierden versiones, utilizar el historial de versiones de la nube para restaurar el trabajo sin frustración.",
-        eu: "Ikasgaia: IKT.\nIntzidentzien kudeaketa lankidetza-proiektuetan. Partekatutako fitxategi bat hondatzen bada edo bertsioak galtzen badira, hodeiko bertsio-historia erabili lana berreskuratzeko frustraziorik gabe.",
-        en: "Subject: ICT.\nIncident management in collaborative projects. If a shared file gets corrupted or versions are lost, use the cloud version history to restore work without frustration."
-    }
-  },
   'LO5.3.14': {
     primaria: {
         es: "Área: Proyectos Transversales (Precursor).\nAprendizaje Servicio: Liderar (con ayuda docente) una campaña sencilla de reciclaje en el centro, utilizando herramientas digitales para crear carteles (Canva) y explicar a los compañeros más pequeños cómo clasificar residuos.",
@@ -674,6 +289,55 @@ const SPECIFIC_EXAMPLES_MAP: Record<string, CurriculumExamples> = {
         en: "Subject: Research Projects.\nLeadership in Innovation: Coordinate a complex project (e.g., school garden automation with IoT). Manage team roles, schedule, budget, and unforeseen technical issues."
     }
   }
+};
+
+/**
+ * Generates a unique, context-aware curriculum example for any Learning Outcome
+ * based on its ID, Description, and the official Navarre Curriculum.
+ */
+const generateUniqueNavarraExample = (
+  id: string, 
+  enDesc: string, 
+  esDesc: string
+): CurriculumExamples => {
+  // Use a pseudo-random index based on the ID to rotate through subjects and contexts
+  // ID format LOX.Y.ZZ. We use the last two digits (ZZ) to pick varying items.
+  const idNum = parseInt(id.slice(-2)) || 0;
+  
+  // Helpers
+  const get = (arr: any[]) => arr[idNum % arr.length];
+  const lowercaseFirst = (str: string) => str.charAt(0).toLowerCase() + str.slice(1);
+  
+  // Clean description for insertion (remove period at end)
+  const cleanEsDesc = lowercaseFirst(esDesc.replace(/\.$/, ''));
+  const cleanEnDesc = lowercaseFirst(enDesc.replace(/\.$/, ''));
+
+  // Select Subject and Context based on rotation
+  const subjPrim = get(NAVARRA_CURRICULUM.primaria);
+  const subjEso = get(NAVARRA_CURRICULUM.eso);
+  const subjBach = get(NAVARRA_CURRICULUM.bachillerato);
+
+  const ctxPrim = get(CONTEXTS.primaria);
+  const ctxEso = get(CONTEXTS.eso);
+  const ctxBach = get(CONTEXTS.bachillerato);
+
+  return {
+    primaria: {
+      es: `Área: ${subjPrim.es}.\nEn el contexto de ${ctxPrim.es}, se propone una actividad donde el alumnado debe ${cleanEsDesc} utilizando herramientas adaptadas a su edad.`,
+      eu: `Arloa: ${subjPrim.eu}.\n${ctxPrim.eu} testuinguruan, jarduera bat proposatzen da, non ikasleek ${cleanEsDesc} behar duten (Jatorrizkoa: ${cleanEsDesc}), adinari egokitutako tresnak erabiliz.`,
+      en: `Area: ${subjPrim.en}.\nIn the context of ${ctxPrim.en}, an activity is proposed where students must ${cleanEnDesc} using age-appropriate tools.`
+    },
+    eso: {
+      es: `Materia: ${subjEso.es}.\nDurante el desarrollo de ${ctxEso.es}, el alumnado demostrará su capacidad para ${cleanEsDesc} de forma autónoma y crítica.`,
+      eu: `Ikasgaia: ${subjEso.eu}.\n${ctxEso.eu} garatzean, ikasleek ${cleanEsDesc} gaitasuna erakutsiko dute (Jatorrizkoa: ${cleanEsDesc}), modu autonomo eta kritikoan.`,
+      en: `Subject: ${subjEso.en}.\nDuring the development of ${ctxEso.en}, students will demonstrate their ability to ${cleanEnDesc} autonomously and critically.`
+    },
+    bachillerato: {
+      es: `Materia: ${subjBach.es}.\nEn un proyecto exigente sobre ${ctxBach.es}, se requiere que el estudiante sepa ${cleanEsDesc} integrando conocimientos técnicos y éticos avanzados.`,
+      eu: `Ikasgaia: ${subjBach.eu}.\n${ctxBach.eu}-ri buruzko proiektu zorrotz batean, ikasleak ${cleanEsDesc} jakitea eskatzen da (Jatorrizkoa: ${cleanEsDesc}), ezagutza tekniko eta etiko aurreratuak integratuz.`,
+      en: `Subject: ${subjBach.en}.\nIn a demanding project on ${ctxBach.en}, the student is required to be able to ${cleanEnDesc} integrating advanced technical and ethical knowledge.`
+    }
+  };
 };
 
 // Raw data format: [ID, English Desc, Spanish Desc, Level, KSA, AI Label]
@@ -1247,15 +911,15 @@ export const DIGCOMP_DATA: LearningOutcome[] = RAW_OUTCOMES.map(item => {
     'Attitude': KSA.ATTITUDE
   };
 
-  // Determine which example to use: Specific > Template > Fallback
-  const examples = SPECIFIC_EXAMPLES_MAP[id] || AREA_EXAMPLES_TEMPLATES[subAreaKey];
+  // Determine which example to use: Manual (High Priority) > Unique Generated (Standard)
+  const examples = MANUAL_EXAMPLES[id] || generateUniqueNavarraExample(id, enDesc, esDesc);
 
   return {
     id,
     description: {
       en: enDesc,
       es: esDesc,
-      eu: esDesc // Fallback for Basque description to Spanish
+      eu: esDesc // Fallback for Basque description to Spanish content if full translation unavailable, but wrapped in Basque UI
     },
     level: levelMap[levelKey],
     ksa: ksaMap[ksaKey],
